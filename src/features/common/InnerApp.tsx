@@ -7,7 +7,7 @@ import Dashboard from '../../pages/Dashboard';
 import BillTrackingApp from '../../pages/BillTrackingApp';
 import LoginPage from '../../pages/login/LoginPage';
 import NotFoundPage from '../../pages/NotFoundPage';
-import SideMenu from './SideMenu';
+import SideMenu from './SideMenu/SideMenu';
 import TopBar from './TopBar';
 import SettingsMenu from '../../pages/SettingsMenu';
 

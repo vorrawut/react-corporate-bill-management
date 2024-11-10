@@ -1,0 +1,197 @@
+/* SideMenu.module.css */
+
+/* General container styles */
+.sideMenuContainer {
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffffff 0%, #e6f7ff 100%);
+}
+
+.sideMenuContainer.dark {
+  background: linear-gradient(135deg, #2e2e2e 0%, #1f1f1f 100%);
+}
+
+/* Profile section styling */
+.profileSection {
+  text-align: center;
+  transition: padding 0.4s ease;
+  cursor: pointer;
+  padding: 40px 10px;
+  margin: 10px 15px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #85ffbd, #fffb7d);
+}
+
+.profileSection.collapsed {
+  padding: 20px 0;
+  background: transparent;
+}
+
+.profileAvatar {
+  background-color: #ff85c0;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.profileAvatar.collapsed {
+  box-shadow: none;
+}
+
+.profileInfo {
+  margin-top: 15px;
+  color: #000; /* Default color for light mode */
+}
+
+.profileInfo.dark {
+  color: #fff; /* Color for dark mode */
+}
+
+.profileName {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.profileHandle {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+.profileHandle.dark {
+  color: #ccc; /* Adjusted for dark mode to be more readable */
+}
+
+/* Profile Menu styles */
+.profileMenu {
+  border-radius: 10px;
+  background-color: #ffffff; /* Default for light theme */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profileMenu.dark {
+  background-color: #333333 !important; /* Dark theme background */
+}
+
+.profileMenu .ant-menu-item {
+  color: #000; /* Light theme default text color */
+}
+
+.profileMenu.dark .ant-menu-item {
+  color: #ffffff !important; /* Dark theme text color */
+}
+
+.profileMenu .ant-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+.profileMenu.dark .ant-menu-item:hover {
+  background-color: #505050 !important;
+}
+
+/* Menu container styling */
+.menuContainer {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.menuContainer.dark {
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Menu item styling */
+.menuItem {
+  margin-bottom: 14px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border-radius: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.menuItem.dark:hover {
+  background-color: #505050;
+}
+
+.menuItem:hover {
+  background-color: #ffecb3;
+  transform: scale(1.05);
+}
+
+.menuItem.dark {
+  color: #ffffff;
+}
+
+.menuItemSelected {
+  background-color: #ffd666; /* Selected color for light mode */
+  color: #000000 !important;
+}
+
+.menuItemSelected.dark {
+  background-color: #ff8c00; /* High contrast selected color for dark mode */
+  color: #ffffff !important;
+}
+
+/* Menu item icon styling */
+.menuItemIcon {
+  font-size: 1.8rem;
+}
+
+.menuItemIcon.dashboard {
+  color: #ff7875;
+}
+
+.menuItemIcon.billTracking {
+  color: #73d13d;
+}
+
+.menuItemIcon.notifications {
+  color: #40a9ff;
+}
+
+/* Submenu styling */
+.subMenu {
+  margin-bottom: 12px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.subMenuIcon {
+  font-size: 1.8rem;
+  color: #ffa940;
+}
+
+.menuLink {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.menuLink:hover {
+  color: #1890ff;
+}
+
+.menuLink.dark {
+  color: #ffffff;
+}
+
+.menuLink.dark:hover {
+  color: #40a9ff;
+}
+
+.menuLink.light {
+  color: #000000;
+}
+
+.menuLink.light:hover {
+  color: #1890ff;
+}

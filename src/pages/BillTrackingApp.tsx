@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input } from 'antd';
+import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input, message } from 'antd';
 import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, PieChartOutlined, SearchOutlined } from '@ant-design/icons';
 import BillTable from '../components/BillTable';
 import YearSummaryTable from '../components/YearSummaryTable';
@@ -14,13 +14,13 @@ const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const BillTrackingApp: React.FC = () => {
-  const { bills, addBill, updateBill, deleteBill } = useBillData();
+  const { bills, addBill, updateBill, deleteBill, syncWithBackend, loading } = useBillData();
   const [isFormModalVisible, setFormModalVisible] = useState(false);
   const [editBill, setEditBill] = useState<Bill | null>(null);
   const { exportToExcel } = useExport();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBills, setFilteredBills] = useState<Bill[]>(bills);
-  const [activeTab, setActiveTab] = useState('1');
+  const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab') || '1');
 
   useEffect(() => {
     setFilteredBills(
@@ -29,6 +29,11 @@ const BillTrackingApp: React.FC = () => {
       )
     );
   }, [bills, searchTerm]);
+
+  useEffect(() => {
+    // Attempt to sync with backend on component mount or whenever the bills change
+    syncWithBackend();
+  }, [bills, syncWithBackend]);
 
   const handleAddBill = () => {
     setEditBill(null);
@@ -40,26 +45,17 @@ const BillTrackingApp: React.FC = () => {
     setFormModalVisible(true);
   };
 
-  const handleFormSubmit = (billData: Bill) => {
-    if (editBill) {
-      updateBill(billData);
-    } else {
-      addBill(billData);
-    }
+  const handleFormSubmit = async (billData: Bill) => {
+    addBill(billData);
+    message.success('Bill added successfully. Syncing with backend...');
     setFormModalVisible(false);
+    await syncWithBackend();
   };
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
     localStorage.setItem('activeTab', key);
   };
-
-  useEffect(() => {
-    const savedTab = localStorage.getItem('activeTab');
-    if (savedTab) {
-      setActiveTab(savedTab);
-    }
-  }, []);
 
   return (
     <Card
@@ -92,62 +88,66 @@ const BillTrackingApp: React.FC = () => {
           style={{ maxWidth: 300 }}
         />
       </Space>
-      <Tabs activeKey={activeTab} onChange={handleTabChange} defaultActiveKey="1" tabBarGutter={16}>
-        <TabPane
-          tab={
-            <span>
-              <TableOutlined />
-              Detailed Bills
-            </span>
-          }
-          key="1"
-        >
-          {bills.length > 0 ? (
-            <BillTable bills={filteredBills} onEdit={handleEditBill} onDelete={deleteBill} />
-          ) : (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <Typography.Text type="secondary">No bills available. Add a new bill to get started.</Typography.Text>
-            </div>
-          )}
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <BarChartOutlined />
-              Yearly Summary
-            </span>
-          }
-          key="2"
-        >
-          {bills.length > 0 ? (
-            <YearSummaryTable bills={bills} />
-          ) : (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <Typography.Text type="secondary">No data available for the yearly summary.</Typography.Text>
-            </div>
-          )}
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <PieChartOutlined />
-              Visualize Expenses
-            </span>
-          }
-          key="3"
-        >
-          {bills.length > 0 ? (
-            <div>
-              <ExpensePieChart bills={bills} />
-              <ExpenseBarChart bills={bills} />
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center', padding: '50px 0' }}>
-              <Typography.Text type="secondary">No data available for visualization.</Typography.Text>
-            </div>
-          )}
-        </TabPane>
-      </Tabs>
+      {loading ? (
+        <Typography.Text>Loading...</Typography.Text>
+      ) : (
+        <Tabs activeKey={activeTab} onChange={handleTabChange} defaultActiveKey="1" tabBarGutter={16}>
+          <TabPane
+            tab={
+              <span>
+                <TableOutlined />
+                Detailed Bills
+              </span>
+            }
+            key="1"
+          >
+            {bills.length > 0 ? (
+              <BillTable bills={filteredBills} onEdit={handleEditBill} onDelete={deleteBill} />
+            ) : (
+              <div style={{ textAlign: 'center', padding: '50px 0' }}>
+                <Typography.Text type="secondary">No bills available. Add a new bill to get started.</Typography.Text>
+              </div>
+            )}
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <BarChartOutlined />
+                Yearly Summary
+              </span>
+            }
+            key="2"
+          >
+            {bills.length > 0 ? (
+              <YearSummaryTable bills={bills} />
+            ) : (
+              <div style={{ textAlign: 'center', padding: '50px 0' }}>
+                <Typography.Text type="secondary">No data available for the yearly summary.</Typography.Text>
+              </div>
+            )}
+          </TabPane>
+          <TabPane
+            tab={
+              <span>
+                <PieChartOutlined />
+                Visualize Expenses
+              </span>
+            }
+            key="3"
+          >
+            {bills.length > 0 ? (
+              <div>
+                <ExpensePieChart bills={bills} />
+                <ExpenseBarChart bills={bills} />
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center', padding: '50px 0' }}>
+                <Typography.Text type="secondary">No data available for visualization.</Typography.Text>
+              </div>
+            )}
+          </TabPane>
+        </Tabs>
+      )}
       <Modal
         title={editBill ? 'Edit Bill' : 'Add Bill'}
         open={isFormModalVisible}

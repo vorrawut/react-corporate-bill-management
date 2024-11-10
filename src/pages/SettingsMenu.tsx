@@ -10,6 +10,13 @@ const { Title } = Typography;
 const SettingsMenu: React.FC = () => {
   const { theme } = useTheme();
 
+  // Array of settings components, useful for dynamic rendering and maintaining scalability
+  const settingsComponents = [
+    { key: 'appearance', component: <AppearanceSettings /> },
+    { key: 'language', component: <LanguageSettings /> },
+    // Additional settings components can be added here
+  ];
+
   return (
     <Layout style={{ minHeight: '100vh', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff' }}>
       <Header
@@ -36,9 +43,19 @@ const SettingsMenu: React.FC = () => {
             padding: '20px',
           }}
         >
-          <AppearanceSettings />
-          <Divider style={{ borderColor: theme === 'dark' ? '#2b2b2b' : '#e0e0e0', margin: '20px 0' }} />
-          <LanguageSettings />
+          {settingsComponents.map((setting, index) => (
+            <React.Fragment key={setting.key}>
+              {setting.component}
+              {index < settingsComponents.length - 1 && (
+                <Divider
+                  style={{
+                    borderColor: theme === 'dark' ? '#2b2b2b' : '#e0e0e0',
+                    margin: '20px 0',
+                  }}
+                />
+              )}
+            </React.Fragment>
+          ))}
         </Card>
       </Content>
     </Layout>

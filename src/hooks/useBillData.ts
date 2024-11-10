@@ -3,17 +3,21 @@ import { Bill } from "../types/Bill";
 
 const useBillData = () => {
   const [bills, setBills] = useState<Bill[]>([]);
+  const [loading, setLoading] = useState<boolean>(true); // Added loading state
 
   useEffect(() => {
     // Fetch initial data (mocked or replace with API call)
     const fetchData = async () => {
       try {
+        setLoading(true); // Start loading
         // Example API fetch or mocked data
         const response = await fetch("/api/bills");
         const data = await response.json();
         setBills(data);
       } catch (error) {
         console.error("Error fetching bill data:", error);
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
 
@@ -36,6 +40,7 @@ const useBillData = () => {
 
   return {
     bills,
+    loading, // Return the loading state
     addBill,
     updateBill,
     deleteBill,

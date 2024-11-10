@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Tooltip, Switch } from 'antd';
+import { Typography, Tooltip, Switch, Row, Col, Card } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import { useTheme } from '../../contexts/ThemeContext';
 import { saveToLocalStorage, loadFromLocalStorage } from '../../utils/localStorageHelper';
@@ -21,7 +21,7 @@ const AppearanceSettings: React.FC = () => {
   const handleThemeChange = (checked: boolean) => {
     const newTheme = checked ? 'dark' : 'light';
     saveToLocalStorage('theme', newTheme);
-    toggleTheme(); // Call the toggle function to update the theme in the app
+    toggleTheme();
   };
 
   if (initialLoad) {
@@ -29,20 +29,41 @@ const AppearanceSettings: React.FC = () => {
   }
 
   return (
-    <div style={{ marginBottom: '20px' }}>
-      <Title level={4} style={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}>Appearance</Title>
-      <Text style={{ display: 'block', marginBottom: '10px', color: theme === 'dark' ? '#d1d1d1' : '#333' }}>
-        Toggle between light and dark mode:
-      </Text>
-      <Tooltip title="Toggle Dark/Light Mode">
-        <Switch
-          checked={theme === 'dark'}
-          onChange={handleThemeChange}
-          checkedChildren={<BulbOutlined />}
-          unCheckedChildren={<BulbOutlined />}
-        />
-      </Tooltip>
-    </div>
+    <Card
+      style={{
+        borderRadius: '12px',
+        padding: '20px',
+        backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff',
+        boxShadow: theme === 'dark' ? '0 4px 12px rgba(0, 0, 0, 0.3)' : '0 4px 12px rgba(0, 0, 0, 0.1)',
+        transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+      }}
+    >
+      <Row justify="space-between" align="middle">
+        <Col>
+          <Title level={4} style={{ color: theme === 'dark' ? '#ffffff' : '#000000', marginBottom: '10px' }}>
+            Appearance
+          </Title>
+          <Text style={{ color: theme === 'dark' ? '#d1d1d1' : '#333' }}>
+            Toggle between light and dark mode:
+          </Text>
+        </Col>
+        <Col>
+          <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} placement="top">
+            <Switch
+              checked={theme === 'dark'}
+              onChange={handleThemeChange}
+              checkedChildren={<BulbOutlined />}
+              unCheckedChildren={<BulbOutlined />}
+              style={{
+                backgroundColor: theme === 'dark' ? '#4f4f4f' : '#f0f0f0',
+                borderColor: theme === 'dark' ? '#4f4f4f' : '#d9d9d9',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          </Tooltip>
+        </Col>
+      </Row>
+    </Card>
   );
 };
 

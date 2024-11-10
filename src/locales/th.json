@@ -1,0 +1,20 @@
+{
+    "language": "ภาษา",
+    "selectLanguage": "เลือกภาษาที่คุณต้องการ:",
+    "selectLanguageTooltip": "เลือกภาษา",
+    "languageOptionEnglish": "อังกฤษ",
+    "languageOptionThai": "ไทย",
+    "Settings": "การตั้งค่า",
+    "Toggle Dark/Light Mode": "สลับโหมดสว่าง/มืด",
+    "Select Language": "เลือกภาษา",
+    "Settings Page ©2024": "หน้าการตั้งค่า ©2024",
+    "Dashboard": "แผงควบคุม",
+    "Bill Tracking": "การติดตามบิล",
+    "Add Bill": "เพิ่มบิล",
+    "Export to Excel": "ส่งออกเป็น Excel",
+    "Edit Bill": "แก้ไขบิล",
+    "Login": "เข้าสู่ระบบ",
+    "Not Found": "ไม่พบหน้า",
+    "Bill Manager": "ผู้จัดการบิล",
+    "Bill Management System": "ระบบจัดการบิล"
+}

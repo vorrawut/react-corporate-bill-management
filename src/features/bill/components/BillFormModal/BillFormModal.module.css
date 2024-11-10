@@ -1,0 +1,128 @@
+/* BillFormModal.module.css */
+
+/* General Container */
+.billFormModal {
+  padding: 20px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+.light {
+  background-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode */
+.dark {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+/* Form Container */
+.formContainer {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Input Fields */
+.input, .textarea, .select, .datePicker {
+  width: 100%;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.lightInput {
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  color: #000000;
+}
+
+.darkInput {
+  background-color: #2a2a2a;
+  border: 1px solid #444444;
+  color: #e0e0e0;
+}
+
+/* Select Dropdown Styles */
+.lightDropdown {
+  background-color: #ffffff !important;
+  border: 1px solid #d9d9d9 !important;
+}
+
+.darkDropdown {
+  background-color: #2a2a2a !important;
+  border: 1px solid #444444 !important;
+}
+
+/* Select Option Styles */
+.ant-select-item-option {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lightDropdown .ant-select-item-option {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.darkDropdown .ant-select-item-option {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.darkDropdown .ant-select-item-option-active {
+  background-color: #3a3a3a !important;
+}
+
+.lightDropdown .ant-select-item-option-active {
+  background-color: #e6f7ff !important;
+}
+
+/* Button Styles */
+.submitButton, .cancelButton {
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.submitButton {
+  background-color: #1890ff;
+  color: #ffffff;
+  border: none;
+}
+
+.submitButton:hover {
+  background-color: #40a9ff;
+  color: #ffffff;
+}
+
+.cancelButton {
+  background-color: #f0f0f0;
+  color: #000000;
+  border: none;
+}
+
+.cancelButton:hover {
+  background-color: #d9d9d9;
+  color: #000000;
+}
+
+.dark .submitButton {
+  background-color: #69c0ff;
+  color: #ffffff;
+}
+
+.dark .cancelButton {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.dark .submitButton:hover {
+  background-color: #91d5ff;
+}
+
+.dark .cancelButton:hover {
+  background-color: #595959;
+}

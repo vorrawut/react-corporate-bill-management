@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Menu, Avatar, Dropdown } from 'antd';
+import { Menu } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SettingOutlined } from '@ant-design/icons';
 import { useTheme } from '../../../contexts/ThemeContext';
-import ProfileMenu from './ProfileMenu';
 import SideMenuItems from './SideMenuItems';
 import styles from './SideMenu.module.css';
 
@@ -43,23 +41,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
 
   return (
     <div className={`${styles.sideMenuContainer} ${theme === 'dark' ? styles.dark : ''}`}>
-      {/* Profile Section */}
-      <div className={`${styles.profileSection} ${collapsed ? styles.collapsed : ''}`}>
-        <Dropdown overlay={<ProfileMenu />} placement="bottomCenter">
-          <Avatar
-            size={collapsed ? 40 : 70}
-            icon={<SettingOutlined />}
-            className={`${styles.profileAvatar} ${collapsed ? styles.collapsed : ''}`}
-          />
-        </Dropdown>
-        {!collapsed && (
-          <div className={`${styles.profileInfo} ${theme === 'dark' ? styles.dark : ''}`}>
-            <span className={styles.profileName}>John Doe</span>
-            <p className={`${styles.profileHandle} ${theme === 'dark' ? styles.dark : ''}`}>@johndoe</p>
-          </div>
-        )}
-      </div>
-
       {/* Menu Items */}
       <Menu
         theme={theme === 'dark' ? 'dark' : 'light'}

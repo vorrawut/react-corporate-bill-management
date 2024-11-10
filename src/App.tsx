@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 import store from './state/store';
 import { ThemeContextProvider } from './contexts/ThemeContext';
 import { LanguageContextProvider } from './contexts/LanguageContext';
-import InnerApp from './features/common/InnerApp';
 import { TranslationProvider } from './contexts/TranslationContext';
+import AppRouter from './router/AppRouter';
+import AppLayout from './components/layout/AppLayout';
 
 
 const App: React.FC = () => (
@@ -12,7 +13,9 @@ const App: React.FC = () => (
     <ThemeContextProvider>
       <LanguageContextProvider>
         <TranslationProvider>
-          <InnerApp />
+          <AppLayout>
+            <AppRouter />
+          </AppLayout>
         </TranslationProvider>
       </LanguageContextProvider>
     </ThemeContextProvider>

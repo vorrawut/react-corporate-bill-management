@@ -1,23 +1,116 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# Node modules & dependencies
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
-/coverage
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# production
-/build
-
-# misc
-.DS_Store
+# Environment variables
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Coverage output
+/coverage
+
+# Production build output
+/build
+/dist
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+
+# IDE specific settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# System files
+*.swp
+*~
+*.bak
+*.tmp
+*.old
+
+# Cache & temporary folders
+/.cache
+/.parcel-cache
+/.next
+/out
+/tmp
+/webpack-cache
+
+# Dependency directories
+/.vscode-test
+
+# npm specific files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Linting
+eslintcache
+
+# Mac-specific files
+.DS_Store
+
+# Temporary build artifacts
+*.tsbuildinfo
+
+# Sentry files
+.sentryclirc
+
+# Jest
+/jest-config.json
+
+# Parcel-bundler cache
+/.parcel-cache
+
+# Storybook build artifacts
+/out-storybook
+
+# Local History files (e.g., JetBrains IDEs)
+.idea/
+
+# Firebase files
+.firebase/
+.firebaserc
+.firebasecache/
+
+# Coverage directory used by tools like istanbul and jest
+coverage/
+.nyc_output/
+
+# macOS system files
+.DS_Store
+
+# VS Code specific settings
+.vscode/
+.vscode-test/
+
+# Generated GraphQL files
+.graphqlconfig
+graphql.schema.json
+
+# Serverless framework
+.serverless/
+
+# Debugger scripts for development tools
+.vscode/*
+launch.json
+tasks.json

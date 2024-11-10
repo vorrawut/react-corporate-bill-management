@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input } from 'antd';
-import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, SearchOutlined } from '@ant-design/icons';
+import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, PieChartOutlined, SearchOutlined } from '@ant-design/icons';
 import BillTable from '../components/BillTable';
 import YearSummaryTable from '../components/YearSummaryTable';
 import BillFormModal from '../components/BillFormModal';
+import ExpensePieChart from '../components/ExpensePieChart';
+import ExpenseBarChart from '../components/ExpenseBarChart';
 import { Bill } from '../types/Bill';
 import useBillData from '../hooks/useBillData';
 import { useExport } from '../hooks/useExport';
@@ -49,7 +51,7 @@ const BillTrackingApp: React.FC = () => {
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
-    localStorage.setItem('activeTab', key); // Save the last viewed tab in local storage
+    localStorage.setItem('activeTab', key);
   };
 
   useEffect(() => {
@@ -122,6 +124,26 @@ const BillTrackingApp: React.FC = () => {
           ) : (
             <div style={{ textAlign: 'center', padding: '50px 0' }}>
               <Typography.Text type="secondary">No data available for the yearly summary.</Typography.Text>
+            </div>
+          )}
+        </TabPane>
+        <TabPane
+          tab={
+            <span>
+              <PieChartOutlined />
+              Visualize Expenses
+            </span>
+          }
+          key="3"
+        >
+          {bills.length > 0 ? (
+            <div>
+              <ExpensePieChart bills={bills} />
+              <ExpenseBarChart bills={bills} />
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '50px 0' }}>
+              <Typography.Text type="secondary">No data available for visualization.</Typography.Text>
             </div>
           )}
         </TabPane>

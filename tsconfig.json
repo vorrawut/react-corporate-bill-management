@@ -55,8 +55,5 @@
     "**/*.test.ts",                                    // Optionally exclude test files if handled separately
     "**/*.test.tsx",
     "coverage"                                         // Typically exclude generated coverage reports
-  ],
-  "references": [                                      // For large projects, utilize project references to organize
-    { "path": "./src/other-package" }
   ]
 }

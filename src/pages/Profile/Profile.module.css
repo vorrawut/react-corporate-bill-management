@@ -1,0 +1,100 @@
+.profileCard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.darkCard {
+  background-color: #1f1f1f;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.lightCard {
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: #000000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.title {
+  color: inherit;
+  font-size: 24px;
+}
+
+.editButton {
+  transition: all 0.3s ease-in-out;
+}
+
+.profileInfo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.avatar {
+  border: 3px solid #1890ff;
+  margin-bottom: 15px;
+  transition: all 0.3s;
+}
+
+.uploadButton {
+  display: block;
+  margin: 0 auto 20px auto;
+  color: #1890ff;
+}
+
+.lastOnlineText {
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.profileForm {
+  margin-top: 20px;
+}
+
+.input {
+  border-radius: 8px;
+}
+
+.darkInput {
+  background-color: #333333;
+  color: #ffffff !important; /* Ensures text color in dark mode */
+  border: 1px solid #444444;
+}
+
+.lightInput {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #d9d9d9;
+}
+
+.textarea {
+  border-radius: 8px;
+}
+
+.submitButton {
+  background: #1890ff;
+  border-color: #1890ff;
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cancelButton {
+  background: #f0f0f0;
+  color: #000000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.darkButton {
+  color: #ffffff;
+  background-color: #555555;
+  border: none;
+}

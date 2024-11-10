@@ -3,6 +3,7 @@ import BillTrackingApp from "src/pages/BillTrackingApp/BillTrackingApp";
 import LoginPage from "src/pages/login/LoginPage";
 import NotFoundPage from "src/pages/NotFoundPage";
 import SettingsMenu from "src/pages/SettingsMenu";
+import ProfilePage from "src/pages/Profile/Profile";
 
 // Define route information for scalability and easier modification
 const routes = [
@@ -28,6 +29,12 @@ const routes = [
     path: "/settings",
     element: <SettingsMenu />,
     title: "Settings",
+    isProtected: false,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+    title: "profile",
     isProtected: false,
   },
   {

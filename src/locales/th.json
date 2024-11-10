@@ -126,5 +126,30 @@
         "addBill": "เพิ่มบิล",
         "updateBill": "อัปเดตบิล",
         "cancel": "ยกเลิก"
+    },
+    "profile": {
+        "title": "โปรไฟล์ผู้ใช้",
+        "editProfile": "แก้ไขโปรไฟล์",
+        "cancelEdit": "ยกเลิกการแก้ไข",
+        "uploadPhoto": "อัพโหลดรูปภาพ",
+        "editPhoto": "แก้ไขรูปภาพ",
+        "lastOnline": "ออนไลน์ล่าสุด",
+        "firstName": "ชื่อจริง",
+        "firstNameRequired": "กรุณากรอกชื่อจริงของคุณ",
+        "lastName": "นามสกุล",
+        "lastNameRequired": "กรุณากรอกนามสกุลของคุณ",
+        "phoneNumber": "หมายเลขโทรศัพท์",
+        "phoneNumberRequired": "กรุณากรอกหมายเลขโทรศัพท์ของคุณ",
+        "email": "ที่อยู่อีเมล",
+        "emailRequired": "กรุณากรอกที่อยู่อีเมลของคุณ",
+        "validEmail": "กรุณากรอกอีเมลที่ถูกต้อง",
+        "taxId": "รหัสประจำตัวผู้เสียภาษี",
+        "taxIdRequired": "กรุณากรอกรหัสประจำตัวผู้เสียภาษีของคุณ",
+        "bookBank": "บัญชีธนาคาร",
+        "bookBankRequired": "กรุณากรอกข้อมูลบัญชีธนาคารของคุณ",
+        "address": "ที่อยู่",
+        "addressRequired": "กรุณากรอกที่อยู่ของคุณ",
+        "saveChanges": "บันทึกการเปลี่ยนแปลง",
+        "cancel": "ยกเลิก"
     }
 }

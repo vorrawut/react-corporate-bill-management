@@ -126,5 +126,30 @@
         "addBill": "Add Bill",
         "updateBill": "Update Bill",
         "cancel": "Cancel"
+    },
+    "profile": {
+        "title": "User Profile",
+        "editProfile": "Edit Profile",
+        "cancelEdit": "Cancel Edit",
+        "uploadPhoto": "Upload Photo",
+        "editPhoto": "Edit Photo",
+        "lastOnline": "Last Online",
+        "firstName": "First Name",
+        "firstNameRequired": "Please enter your first name",
+        "lastName": "Last Name",
+        "lastNameRequired": "Please enter your last name",
+        "phoneNumber": "Phone Number",
+        "phoneNumberRequired": "Please enter your phone number",
+        "email": "Email Address",
+        "emailRequired": "Please enter your email address",
+        "validEmail": "Please enter a valid email address",
+        "taxId": "Tax ID",
+        "taxIdRequired": "Please enter your tax ID",
+        "bookBank": "Book Bank",
+        "bookBankRequired": "Please enter your book bank information",
+        "address": "Address",
+        "addressRequired": "Please enter your address",
+        "saveChanges": "Save Changes",
+        "cancel": "Cancel"
     }
 }

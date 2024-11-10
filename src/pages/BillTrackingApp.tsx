@@ -31,7 +31,6 @@ const BillTrackingApp: React.FC = () => {
   }, [bills, searchTerm]);
 
   useEffect(() => {
-    // Attempt to sync with backend on component mount or whenever the bills change
     syncWithBackend();
   }, [bills, syncWithBackend]);
 
@@ -46,8 +45,14 @@ const BillTrackingApp: React.FC = () => {
   };
 
   const handleFormSubmit = async (billData: Bill) => {
-    addBill(billData);
-    message.success('Bill added successfully. Syncing with backend...');
+    if (editBill) {
+      updateBill(billData);
+      message.success('Bill updated successfully. Syncing with backend...');
+    } else {
+      addBill(billData);
+      message.success('Bill added successfully. Syncing with backend...');
+    }
+
     setFormModalVisible(false);
     await syncWithBackend();
   };

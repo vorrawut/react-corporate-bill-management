@@ -1,5 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Bill } from "../types/Bill";
+import BillService from "../services/BillService";
+import {
+  saveToLocalStorage,
+  loadFromLocalStorage,
+  removeFromLocalStorage,
+} from "../utils/localStorageHelper";
 
 const LOCAL_STORAGE_KEY = "pendingBills";
 
@@ -7,26 +13,22 @@ const useBillData = () => {
   const [bills, setBills] = useState<Bill[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Load initial data from localStorage and API
   useEffect(() => {
     const loadInitialData = async () => {
       setLoading(true);
       try {
-        // Load bills from localStorage
-        const storedBills = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (storedBills) {
-          const parsedBills = JSON.parse(storedBills) as Bill[];
-          setBills(parsedBills);
+        // Load bills from local storage
+        const localBills =
+          loadFromLocalStorage<Bill[]>(LOCAL_STORAGE_KEY) || [];
+        if (localBills.length > 0) {
+          console.info("Loaded bills from local storage.");
         }
+        setBills(localBills);
 
-        // Fetch bills from the backend API
-        const response = await fetch("/api/bills");
-        if (response.ok) {
-          const apiBills = await response.json();
-          setBills((prevBills) => [...apiBills, ...prevBills]);
-        } else {
-          console.error("Failed to fetch data from the backend.");
-        }
+        // Fetch bills from the API
+        const apiBills = await BillService.fetchBills();
+        console.info("Fetched bills from the API successfully.");
+        setBills((prevBills) => [...apiBills, ...prevBills]);
       } catch (error) {
         console.error("Error loading initial data:", error);
       } finally {
@@ -37,65 +39,63 @@ const useBillData = () => {
     loadInitialData();
   }, []);
 
-  // Add bill to state and save it to localStorage
-  const addBill = (newBill: Bill) => {
+  const addBill = useCallback((newBill: Bill) => {
     setBills((prevBills) => {
       const updatedBills = [...prevBills, newBill];
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedBills));
+      saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
       return updatedBills;
     });
-  };
+  }, []);
 
-  // Sync bills with the backend and clear them from localStorage if successful
-  const syncWithBackend = async () => {
-    try {
-      const storedBills = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (storedBills) {
-        const pendingBills: Bill[] = JSON.parse(storedBills);
-        for (const bill of pendingBills) {
-          const response = await fetch("/api/bills", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bill),
+  const syncWithBackend = useCallback(async () => {
+    const pendingBills = loadFromLocalStorage<Bill[]>(LOCAL_STORAGE_KEY) || [];
+    if (pendingBills.length > 0) {
+      console.info("Syncing pending bills with the backend...");
+      const failedBills: Bill[] = [];
+
+      for (const bill of pendingBills) {
+        try {
+          await BillService.addBill(bill);
+          console.info(`Bill with ID ${bill.id} successfully synced.`);
+          setBills((prevBills) => {
+            const updatedBills = prevBills.filter((b) => b.id !== bill.id);
+            saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
+            return updatedBills;
           });
-
-          if (response.ok) {
-            console.log(`Bill with ID ${bill.id} successfully saved.`);
-            setBills((prevBills) => {
-              const updatedBills = prevBills.filter((b) => b.id !== bill.id);
-              localStorage.setItem(
-                LOCAL_STORAGE_KEY,
-                JSON.stringify(updatedBills)
-              );
-              return updatedBills;
-            });
-          } else {
-            console.error(`Failed to save bill with ID ${bill.id}`);
-          }
+        } catch (error) {
+          console.error(`Failed to sync bill with ID ${bill.id}:`, error);
+          failedBills.push(bill);
         }
       }
-    } catch (error) {
-      console.error("Error syncing bills with backend:", error);
-    }
-  };
 
-  const updateBill = (updatedBill: Bill) => {
+      // Update local storage with any remaining failed bills
+      if (failedBills.length > 0) {
+        saveToLocalStorage(LOCAL_STORAGE_KEY, failedBills);
+        console.warn("Some bills failed to sync and remain in local storage.");
+      } else {
+        removeFromLocalStorage(LOCAL_STORAGE_KEY);
+        console.info("All pending bills have been successfully synced.");
+      }
+    }
+  }, []);
+
+  const updateBill = useCallback((updatedBill: Bill) => {
     setBills((prevBills) => {
       const updatedBills = prevBills.map((bill) =>
         bill.id === updatedBill.id ? updatedBill : bill
       );
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedBills));
+      saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
       return updatedBills;
     });
-  };
+  }, []);
 
-  const deleteBill = (id: string) => {
+  const deleteBill = useCallback((id: string) => {
     setBills((prevBills) => {
       const updatedBills = prevBills.filter((bill) => bill.id !== id);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedBills));
+      saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
       return updatedBills;
     });
-  };
+  }, []);
 
   return {
     bills,

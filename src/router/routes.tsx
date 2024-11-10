@@ -4,6 +4,7 @@ import LoginPage from "src/pages/login/LoginPage";
 import NotFoundPage from "src/pages/NotFoundPage";
 import SettingsMenu from "src/pages/SettingsMenu";
 import ProfilePage from "src/pages/Profile/Profile";
+import NotificationPage from "src/pages/Notification/NotificationPage";
 
 // Define route information for scalability and easier modification
 const routes = [
@@ -35,6 +36,12 @@ const routes = [
     path: "/profile",
     element: <ProfilePage />,
     title: "profile",
+    isProtected: false,
+  },
+  {
+    path: "/notifications",
+    element: <NotificationPage />,
+    title: "notifications",
     isProtected: false,
   },
   {

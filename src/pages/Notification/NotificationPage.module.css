@@ -1,0 +1,92 @@
+.notificationCard {
+    margin: 24px;
+    transition: all 0.3s ease-in-out;
+}
+
+.darkCard {
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+}
+
+.lightCard {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.darkText {
+    color: #f0f0f0;
+}
+
+.lightText {
+    color: #000000;
+}
+
+.darkTextSecondary {
+    color: #d0d0d0;
+}
+
+.lightTextSecondary {
+    color: #5f5f5f;
+}
+
+.darkTextTimestamp {
+    color: #a0a0a0;
+}
+
+.lightTextTimestamp {
+    color: #888888;
+}
+
+.notificationItem {
+    padding: 16px;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.darkNotificationItem:hover {
+    background-color: #3a3a3a;
+    border-color: #555;
+}
+
+.lightNotificationItem:hover {
+    background-color: #f9f9f9;
+    border-color: #ccc;
+}
+
+.darkAvatar {
+    background-color: #555555;
+}
+
+.lightAvatar {
+    background-color: #e0e0e0;
+}
+
+.deleteButton {
+    transition: color 0.3s ease;
+}
+
+.darkDelete {
+    color: #ff7875 !important;
+}
+
+.lightDelete {
+    color: #f5222d !important;
+}
+
+.darkDivider {
+    border-top: 1px solid #444;
+}
+
+.lightDivider {
+    border-top: 1px solid #e0e0e0;
+}
+
+.noNotifications {
+    text-align: center;
+    font-style: italic;
+    margin-top: 20px;
+}

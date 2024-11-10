@@ -151,5 +151,14 @@
         "addressRequired": "Please enter your address",
         "saveChanges": "Save Changes",
         "cancel": "Cancel"
+    },
+    "notification": {
+        "title": "Notifications",
+        "delete": "Delete",
+        "deleteConfirm": "Are you sure you want to delete this notification?",
+        "deleteSuccess": "Notification deleted successfully.",
+        "noNotifications": "You have no notifications.",
+        "yes": "Yes",
+        "no": "No"
     }
 }

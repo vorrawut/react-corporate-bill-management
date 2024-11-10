@@ -1,19 +1,14 @@
 import React from 'react';
-import { Layout, Card, Switch, Tooltip, Select, Typography } from 'antd';
-import { BulbOutlined, GlobalOutlined } from '@ant-design/icons';
+import { Layout, Card, Typography } from 'antd';
 import { useTheme } from '../contexts/ThemeContext';
-import i18n from '../i18n';
+import AppearanceSettings from '../features/settings/AppearanceSettings';
+import LanguageSettings from '../features/settings/LanguageSettings';
 
 const { Header, Content, Footer } = Layout;
-const { Option } = Select;
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const SettingsMenu: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
-
-  const changeLanguage = (value: string) => {
-    i18n.changeLanguage(value);
-  };
+  const { theme } = useTheme();
 
   return (
     <Layout style={{ minHeight: '100vh', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff' }}>
@@ -41,43 +36,17 @@ const SettingsMenu: React.FC = () => {
           }}
           bodyStyle={{ padding: '20px' }}
         >
-          <div style={{ marginBottom: '20px' }}>
-            <Title level={4} style={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}>Appearance</Title>
-            <Text style={{ display: 'block', marginBottom: '10px', color: theme === 'dark' ? '#d1d1d1' : '#333' }}>
-              Toggle between light and dark mode:
-            </Text>
-            <Tooltip title="Toggle Dark/Light Mode">
-              <Switch
-                checked={theme === 'dark'}
-                onChange={toggleTheme}
-                checkedChildren={<BulbOutlined />}
-                unCheckedChildren={<BulbOutlined />}
-              />
-            </Tooltip>
-          </div>
-          <div style={{ marginBottom: '20px' }}>
-            <Title level={4} style={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}>Language</Title>
-            <Text style={{ display: 'block', marginBottom: '10px', color: theme === 'dark' ? '#d1d1d1' : '#333' }}>
-              Select your preferred language:
-            </Text>
-            <Tooltip title="Select Language">
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <GlobalOutlined style={{ marginRight: '10px', color: theme === 'dark' ? '#ffffff' : '#000000' }} />
-                <Select
-                  defaultValue="en"
-                  style={{ width: 140 }}
-                  onChange={changeLanguage}
-                  dropdownStyle={{ borderRadius: '8px' }}
-                >
-                  <Option value="en">English</Option>
-                  <Option value="th">ไทย</Option>
-                </Select>
-              </div>
-            </Tooltip>
-          </div>
+          <AppearanceSettings />
+          <LanguageSettings />
         </Card>
       </Content>
-      <Footer style={{ textAlign: 'center', backgroundColor: theme === 'dark' ? '#141414' : '#f0f2f5', color: theme === 'dark' ? '#ffffff' : '#000000' }}>
+      <Footer
+        style={{
+          textAlign: 'center',
+          backgroundColor: theme === 'dark' ? '#141414' : '#f0f2f5',
+          color: theme === 'dark' ? '#ffffff' : '#000000',
+        }}
+      >
         ©2024 Bill Management System
       </Footer>
     </Layout>

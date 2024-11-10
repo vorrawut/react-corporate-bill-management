@@ -6,10 +6,11 @@ import Dashboard from '../pages/Dashboard';
 import BillTrackingApp from '../pages/BillTrackingApp';
 import LoginPage from '../pages/LoginPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import SettingsMenu from '../pages/SettingsMenu';
 import SideMenu from '../components/SideMenu';
+import TopBar from '../components/TopBar';
+import SettingsMenu from '../pages/SettingsMenu';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 const InnerApp: React.FC = () => {
   const { theme } = useTheme();
@@ -24,8 +25,7 @@ const InnerApp: React.FC = () => {
           <SideMenu collapsed={false} />
         </Sider>
         <Layout>
-          <Header style={{ background: theme === 'dark' ? '#141414' : '#fff', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          </Header>
+          <TopBar />
           <Content style={{ margin: '16px', padding: '20px', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff', color: theme === 'dark' ? '#ffffff' : '#000000', borderRadius: '8px' }}>
             <Routes>
               <Route path="/" element={<Dashboard />} />

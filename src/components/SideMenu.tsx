@@ -19,12 +19,6 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
       <Menu.Item key="2" icon={<FileTextOutlined />}>
         <Link to="/bills">Bill Tracking</Link>
       </Menu.Item>
-      <Menu.Item key="3" icon={<LoginOutlined />}>
-        <Link to="/login">Login</Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<SettingOutlined />}>
-        <Link to="/settings">Settings</Link>
-      </Menu.Item>
     </Menu>
   );
 };

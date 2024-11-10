@@ -40,9 +40,6 @@ const SettingsMenu: React.FC = () => {
           </Tooltip>
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center', backgroundColor: theme === 'dark' ? '#141414' : '#f0f2f5', color: theme === 'dark' ? '#ffffff' : '#000000' }}>
-        Settings Page ©2024
-      </Footer>
     </Layout>
   );
 };

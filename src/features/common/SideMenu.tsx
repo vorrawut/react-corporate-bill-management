@@ -10,6 +10,7 @@ import {
   NotificationOutlined,
 } from '@ant-design/icons';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useGlobalTranslation } from 'src/contexts/TranslationContext';
 
 const { SubMenu } = Menu;
 
@@ -19,18 +20,19 @@ interface SideMenuProps {
 
 const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
   const { theme } = useTheme();
+  const t = useGlobalTranslation();
 
   // User Profile Dropdown Menu
   const profileMenu = (
     <Menu>
       <Menu.Item key="profile" icon={<UserOutlined />}>
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile">{t('Profile')}</Link> {/* Translated label */}
       </Menu.Item>
       <Menu.Item key="settings" icon={<SettingOutlined />}>
-        <Link to="/settings">Settings</Link>
+        <Link to="/settings">{t('Settings')}</Link> {/* Translated label */}
       </Menu.Item>
       <Menu.Item key="logout" icon={<LogoutOutlined />}>
-        <Link to="/logout">Logout</Link>
+        <Link to="/logout">{t('Logout')}</Link> {/* Translated label */}
       </Menu.Item>
     </Menu>
   );
@@ -46,12 +48,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
           }}
         />
       ),
-      label: collapsed ? null : <Link to="/">Dashboard</Link>,
+      label: collapsed ? null : <Link to="/">{t('Dashboard')}</Link>, // Translated label
     },
     {
       key: 'billTracking',
       icon: (
-        <Tooltip title={collapsed ? 'Bill Tracking' : ''} placement="right">
+        <Tooltip title={collapsed ? t('Bill Tracking') : ''} placement="right">
           <Badge count={5} size="small" offset={[10, 0]}>
             <FileTextOutlined
               style={{
@@ -61,12 +63,12 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
           </Badge>
         </Tooltip>
       ),
-      label: collapsed ? null : <Link to="/bills">Bill Tracking</Link>,
+      label: collapsed ? null : <Link to="/bills">{t('Bill Tracking')}</Link>, // Translated label
     },
     {
       key: 'notifications',
       icon: (
-        <Tooltip title={collapsed ? 'Notifications' : ''} placement="right">
+        <Tooltip title={collapsed ? t('Notifications') : ''} placement="right">
           <Badge count={3} size="small" offset={[10, 0]}>
             <NotificationOutlined
               style={{
@@ -76,7 +78,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
           </Badge>
         </Tooltip>
       ),
-      label: collapsed ? null : <Link to="/notifications">Notifications</Link>,
+      label: collapsed ? null : <Link to="/notifications">{t('Notifications')}</Link>, // Translated label
     },
   ];
 
@@ -154,7 +156,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
               }}
             />
           }
-          title={!collapsed ? 'Settings' : ''}
+          title={!collapsed ? t('Settings') : ''}
           style={{
             marginBottom: '12px', // Gap between SubMenu and other items
             height: '60px',
@@ -163,10 +165,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
           }}
         >
           <Menu.Item key="settings:1">
-            <Link to="/settings/general">General Settings</Link>
+            <Link to="/settings/general">{t('General Settings')}</Link> {/* Translated label */}
           </Menu.Item>
           <Menu.Item key="settings:2">
-            <Link to="/settings/security">Security</Link>
+            <Link to="/settings/security">{t('Security')}</Link> {/* Translated label */}
           </Menu.Item>
         </SubMenu>
       </Menu>

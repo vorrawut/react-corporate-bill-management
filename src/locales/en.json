@@ -16,5 +16,10 @@
     "Login": "Login",
     "Not Found": "Not Found",
     "Bill Manager": "Bill Manager",
-    "Bill Management System": "Bill Management System"
+    "Bill Management System": "Bill Management System",
+    "Profile": "Profile",
+    "Logout": "Logout",
+    "Notifications": "Notifications",
+    "General Settings": "General Settings",
+    "Security": "Security"
 }

@@ -4,14 +4,14 @@ import { GlobalOutlined } from '@ant-design/icons';
 import i18n from '../../i18n';
 import { saveToLocalStorage, loadFromLocalStorage } from '../../utils/localStorageHelper';
 import { useTheme } from '../../contexts/ThemeContext';
-import { useTranslation } from 'react-i18next';
+import { useGlobalTranslation } from 'src/contexts/TranslationContext';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const LanguageSettings: React.FC = () => {
     const { theme } = useTheme();
-    const { t } = useTranslation<'translation'>();
+    const t = useGlobalTranslation();
     const [currentLanguage, setCurrentLanguage] = useState<string>(() => {
         return loadFromLocalStorage<string>('appLanguage') || i18n.language || 'en';
     });

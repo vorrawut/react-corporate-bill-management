@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card } from 'antd';
 import { Bar } from 'react-chartjs-2';
-import { Bill } from '../../../types/Bill';
+import { Bill } from '../../../../types/Bill';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
-import { useGlobalTranslation } from '../../../contexts/TranslationContext';
+import { useGlobalTranslation } from '../../../../contexts/TranslationContext';
+import { BillAnalyticsConstants, BILL_STATUS_TRANSLATION_MAP } from './BillAnalyticsConstants';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
 
@@ -22,11 +23,18 @@ const BillAnalytics: React.FC<BillAnalyticsProps> = ({ bills }) => {
     { Pending: 0, Paid: 0, Overdue: 0 }
   );
 
+  // Use translation map for status labels
+  const labels = [
+    t(BILL_STATUS_TRANSLATION_MAP.Pending),
+    t(BILL_STATUS_TRANSLATION_MAP.Paid),
+    t(BILL_STATUS_TRANSLATION_MAP.Overdue),
+  ];
+
   const data = {
-    labels: [t('bill_analytics.pending'), t('bill_analytics.paid'), t('bill_analytics.overdue')], // Translate the status labels
+    labels, // Use translated labels
     datasets: [
       {
-        label: t('bill_analytics.numberOfBills'), // Translate the dataset label
+        label: t(BillAnalyticsConstants.numberOfBills), // Translate the dataset label
         data: [billStatusCounts.Pending, billStatusCounts.Paid, billStatusCounts.Overdue],
         backgroundColor: ['#FFCC00', '#4CAF50', '#F44336'],
       },
@@ -35,7 +43,7 @@ const BillAnalytics: React.FC<BillAnalyticsProps> = ({ bills }) => {
 
   return (
     <Card
-      title={t('bill_analytics.billStatusAnalytics')} // Translate the card title
+      title={t(BillAnalyticsConstants.billStatusAnalytics)} // Translate the card title
       style={{
         marginTop: 20,
         borderRadius: '12px',
@@ -52,7 +60,7 @@ const BillAnalytics: React.FC<BillAnalyticsProps> = ({ bills }) => {
             },
             title: {
               display: true,
-              text: t('bill_analytics.billStatusDistribution'), // Translate the chart title
+              text: t(BillAnalyticsConstants.billStatusDistribution), // Translate the chart title
             },
           },
         }}

@@ -1,0 +1,8 @@
+/* SearchBar.module.css */
+.placeholderText.light {
+  color: #000000;
+}
+
+.placeholderText.dark {
+  color: #e0e0e0;
+}

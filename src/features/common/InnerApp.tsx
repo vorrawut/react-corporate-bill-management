@@ -4,7 +4,7 @@ import { Layout, Button } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { useTheme } from '../../contexts/ThemeContext';
 import Dashboard from '../../pages/Dashboard';
-import BillTrackingApp from '../../pages/BillTrackingApp';
+import BillTrackingApp from '../../pages/BillTrackingApp/BillTrackingApp';
 import LoginPage from '../../pages/login/LoginPage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import SideMenu from './SideMenu/SideMenu';

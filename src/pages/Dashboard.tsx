@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Row, Col, Statistic, Typography, Tooltip, Space, Skeleton } from 'antd';
 import { BarChartOutlined, DollarOutlined, FileOutlined } from '@ant-design/icons';
-import BillAnalytics from '../features/bill/components/BillAnalytics';
+import BillAnalytics from '../features/bill/components/BillAnalytics/BillAnalytics';
 import useBillData from '../hooks/useBillData';
 import { useGlobalTranslation } from '../contexts/TranslationContext';
 

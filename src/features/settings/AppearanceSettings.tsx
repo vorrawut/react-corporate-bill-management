@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Tooltip, Switch, Row, Col, Card } from 'antd';
 import { BulbOutlined } from '@ant-design/icons';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useGlobalTranslation } from '../../contexts/TranslationContext'; // Assuming you have this for translations
 import { saveToLocalStorage, loadFromLocalStorage } from '../../utils/localStorageHelper';
 
 const { Title, Text } = Typography;
@@ -9,6 +10,7 @@ const { Title, Text } = Typography;
 const AppearanceSettings: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [initialLoad, setInitialLoad] = useState(true);
+  const t = useGlobalTranslation(); // Hook to handle translations
 
   useEffect(() => {
     const savedTheme = loadFromLocalStorage<string>('theme');
@@ -41,14 +43,14 @@ const AppearanceSettings: React.FC = () => {
       <Row justify="space-between" align="middle">
         <Col>
           <Title level={4} style={{ color: theme === 'dark' ? '#ffffff' : '#000000', marginBottom: '10px' }}>
-            Appearance
+            {t('Appearance')} {/* Translated title */}
           </Title>
           <Text style={{ color: theme === 'dark' ? '#d1d1d1' : '#333' }}>
-            Toggle between light and dark mode:
+            {t('Toggle between light and dark mode:')} {/* Translated description */}
           </Text>
         </Col>
         <Col>
-          <Tooltip title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} placement="top">
+          <Tooltip title={t(`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`)} placement="top">
             <Switch
               checked={theme === 'dark'}
               onChange={handleThemeChange}

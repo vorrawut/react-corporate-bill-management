@@ -21,5 +21,12 @@
     "Logout": "Logout",
     "Notifications": "Notifications",
     "General Settings": "General Settings",
-    "Security": "Security"
+    "Security": "Security",
+    "Appearance Settings": "Appearance Settings",
+    "Language Settings": "Language Settings",
+    "Appearance": "Appearance",
+    "Toggle between light and dark mode:": "Toggle between light and dark mode:",
+    "Switch to light mode": "Switch to light mode",
+    "Switch to dark mode": "Switch to dark mode",
+    "Additional Settings": "Additional Settings"
 }

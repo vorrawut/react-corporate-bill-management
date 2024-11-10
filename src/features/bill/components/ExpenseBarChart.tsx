@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label, LabelList, Cell
 } from 'recharts';
-import { Bill } from '../types/Bill';
+import { Bill } from '../../../types/Bill';
 
 interface ExpenseBarChartProps {
   bills: Bill[];

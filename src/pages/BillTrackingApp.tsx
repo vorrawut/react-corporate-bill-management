@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input, message } from 'antd';
+import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input, message, Skeleton } from 'antd';
 import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, PieChartOutlined, SearchOutlined } from '@ant-design/icons';
-import BillTable from '../components/BillTable';
-import YearSummaryTable from '../components/YearSummaryTable';
-import BillFormModal from '../components/BillFormModal';
-import ExpensePieChart from '../components/ExpensePieChart';
-import ExpenseBarChart from '../components/ExpenseBarChart';
+import BillTable from '../features/bill/components/BillTable/BillTable';
+import YearSummaryTable from '../features/bill/components/YearSummaryTable';
+import BillFormModal from '../features/bill/components/BillFormModal';
+import ExpensePieChart from '../features/bill/components/ExpensePieChart';
+import ExpenseBarChart from '../features/bill/components/ExpenseBarChart';
 import { Bill } from '../types/Bill';
 import useBillData from '../hooks/useBillData';
 import { useExport } from '../hooks/useExport';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 const BillTrackingApp: React.FC = () => {
@@ -32,7 +32,7 @@ const BillTrackingApp: React.FC = () => {
 
   useEffect(() => {
     syncWithBackend();
-  }, [bills, syncWithBackend]);
+  }, [syncWithBackend]);
 
   const handleAddBill = () => {
     setEditBill(null);
@@ -75,12 +75,12 @@ const BillTrackingApp: React.FC = () => {
       <Space style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Tooltip title="Add a new bill">
-            <Button type="primary" icon={<PlusOutlined />} onClick={handleAddBill}>
+            <Button type="primary" icon={<PlusOutlined />} onClick={handleAddBill} aria-label="Add a new bill">
               Add Bill
             </Button>
           </Tooltip>
           <Tooltip title="Export all bills to Excel">
-            <Button type="default" icon={<FileExcelOutlined />} onClick={() => exportToExcel(bills)}>
+            <Button type="default" icon={<FileExcelOutlined />} onClick={() => exportToExcel(bills)} aria-label="Export to Excel">
               Export to Excel
             </Button>
           </Tooltip>
@@ -94,7 +94,7 @@ const BillTrackingApp: React.FC = () => {
         />
       </Space>
       {loading ? (
-        <Typography.Text>Loading...</Typography.Text>
+        <Skeleton active paragraph={{ rows: 8 }} />
       ) : (
         <Tabs activeKey={activeTab} onChange={handleTabChange} defaultActiveKey="1" tabBarGutter={16}>
           <TabPane
@@ -107,10 +107,10 @@ const BillTrackingApp: React.FC = () => {
             key="1"
           >
             {bills.length > 0 ? (
-              <BillTable bills={filteredBills} onEdit={handleEditBill} onDelete={deleteBill} />
+              <BillTable bills={filteredBills} onEdit={handleEditBill} onDelete={deleteBill} loading={loading} />
             ) : (
               <div style={{ textAlign: 'center', padding: '50px 0' }}>
-                <Typography.Text type="secondary">No bills available. Add a new bill to get started.</Typography.Text>
+                <Text type="secondary">No bills available. Add a new bill to get started.</Text>
               </div>
             )}
           </TabPane>
@@ -127,7 +127,7 @@ const BillTrackingApp: React.FC = () => {
               <YearSummaryTable bills={bills} />
             ) : (
               <div style={{ textAlign: 'center', padding: '50px 0' }}>
-                <Typography.Text type="secondary">No data available for the yearly summary.</Typography.Text>
+                <Text type="secondary">No data available for the yearly summary.</Text>
               </div>
             )}
           </TabPane>
@@ -147,7 +147,7 @@ const BillTrackingApp: React.FC = () => {
               </div>
             ) : (
               <div style={{ textAlign: 'center', padding: '50px 0' }}>
-                <Typography.Text type="secondary">No data available for visualization.</Typography.Text>
+                <Text type="secondary">No data available for visualization.</Text>
               </div>
             )}
           </TabPane>

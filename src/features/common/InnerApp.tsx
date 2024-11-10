@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from 'antd';
-import { useTheme } from '../contexts/ThemeContext';
-import Dashboard from '../pages/Dashboard';
-import BillTrackingApp from '../pages/BillTrackingApp';
-import LoginPage from '../pages/LoginPage';
-import NotFoundPage from '../pages/NotFoundPage';
-import SideMenu from '../components/SideMenu';
-import TopBar from '../components/TopBar';
-import SettingsMenu from '../pages/SettingsMenu';
+import { useTheme } from '../../contexts/ThemeContext';
+import Dashboard from '../../pages/Dashboard';
+import BillTrackingApp from '../../pages/BillTrackingApp';
+import LoginPage from '../../pages/login/LoginPage';
+import NotFoundPage from '../../pages/NotFoundPage';
+import SideMenu from './SideMenu';
+import TopBar from './TopBar';
+import SettingsMenu from '../../pages/SettingsMenu';
 
 const { Content, Footer, Sider } = Layout;
 

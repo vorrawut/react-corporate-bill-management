@@ -11,4 +11,5 @@ export interface Bill {
   paymentDate?: string; // or Date, optional for flexibility
   notes?: string; // optional field for additional notes
   type: string;
+  isLocal: boolean;
 }

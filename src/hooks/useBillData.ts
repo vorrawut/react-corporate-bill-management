@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Bill } from "../types/Bill";
-import BillService from "../services/BillService";
+import BillService from "../features/bill/services/BillService";
 import {
   saveToLocalStorage,
   loadFromLocalStorage,
@@ -23,12 +23,15 @@ const useBillData = () => {
         if (localBills.length > 0) {
           console.info("Loaded bills from local storage.");
         }
-        setBills(localBills);
+        setBills(localBills.map((bill) => ({ ...bill, isLocal: true }))); // Mark local bills as unsynced
 
         // Fetch bills from the API
         const apiBills = await BillService.fetchBills();
         console.info("Fetched bills from the API successfully.");
-        setBills((prevBills) => [...apiBills, ...prevBills]);
+        setBills((prevBills) => [
+          ...apiBills.map((bill) => ({ ...bill, isLocal: false })), // Mark API bills as synced
+          ...prevBills,
+        ]);
       } catch (error) {
         console.error("Error loading initial data:", error);
       } finally {
@@ -40,8 +43,9 @@ const useBillData = () => {
   }, []);
 
   const addBill = useCallback((newBill: Bill) => {
+    const newBillWithLocalFlag = { ...newBill, isLocal: true };
     setBills((prevBills) => {
-      const updatedBills = [...prevBills, newBill];
+      const updatedBills = [...prevBills, newBillWithLocalFlag];
       saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
       return updatedBills;
     });
@@ -58,8 +62,13 @@ const useBillData = () => {
           await BillService.addBill(bill);
           console.info(`Bill with ID ${bill.id} successfully synced.`);
           setBills((prevBills) => {
-            const updatedBills = prevBills.filter((b) => b.id !== bill.id);
-            saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
+            const updatedBills = prevBills.map((b) =>
+              b.id === bill.id ? { ...b, isLocal: false } : b
+            );
+            saveToLocalStorage(
+              LOCAL_STORAGE_KEY,
+              updatedBills.filter((b) => b.isLocal)
+            ); // Only save unsynced bills
             return updatedBills;
           });
         } catch (error) {
@@ -68,7 +77,6 @@ const useBillData = () => {
         }
       }
 
-      // Update local storage with any remaining failed bills
       if (failedBills.length > 0) {
         saveToLocalStorage(LOCAL_STORAGE_KEY, failedBills);
         console.warn("Some bills failed to sync and remain in local storage.");
@@ -82,9 +90,14 @@ const useBillData = () => {
   const updateBill = useCallback((updatedBill: Bill) => {
     setBills((prevBills) => {
       const updatedBills = prevBills.map((bill) =>
-        bill.id === updatedBill.id ? updatedBill : bill
+        bill.id === updatedBill.id
+          ? { ...updatedBill, isLocal: bill.isLocal }
+          : bill
       );
-      saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
+      saveToLocalStorage(
+        LOCAL_STORAGE_KEY,
+        updatedBills.filter((b) => b.isLocal)
+      );
       return updatedBills;
     });
   }, []);
@@ -92,7 +105,10 @@ const useBillData = () => {
   const deleteBill = useCallback((id: string) => {
     setBills((prevBills) => {
       const updatedBills = prevBills.filter((bill) => bill.id !== id);
-      saveToLocalStorage(LOCAL_STORAGE_KEY, updatedBills);
+      saveToLocalStorage(
+        LOCAL_STORAGE_KEY,
+        updatedBills.filter((b) => b.isLocal)
+      );
       return updatedBills;
     });
   }, []);

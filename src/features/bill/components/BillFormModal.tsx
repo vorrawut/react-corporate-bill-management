@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input, DatePicker, Select, Button } from 'antd';
-import { Bill } from '../types/Bill';
+import { Bill } from '../../../types/Bill';
 
 interface BillFormModalProps {
   initialValues?: Bill | null;

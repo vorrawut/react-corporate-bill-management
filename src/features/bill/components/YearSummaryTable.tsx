@@ -2,8 +2,8 @@ import React from 'react';
 import { Table, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import type { ColumnsType } from 'antd/es/table';
-import { Bill } from '../types/Bill';
-import { useTheme } from '../contexts/ThemeContext';
+import { Bill } from '../../../types/Bill';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 interface YearSummaryProps {
   bills: Bill[];

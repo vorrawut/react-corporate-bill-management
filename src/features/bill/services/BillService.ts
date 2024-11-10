@@ -1,6 +1,6 @@
 // src/services/BillService.ts
 import axios from "axios";
-import { Bill } from "../types/Bill";
+import { Bill } from "../../../types/Bill";
 
 const axiosInstance = axios.create({
   baseURL: "/api",

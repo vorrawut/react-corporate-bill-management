@@ -1,6 +1,6 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, PieLabelRenderProps } from 'recharts';
-import { Bill } from '../types/Bill';
+import { Bill } from '../../../types/Bill';
 
 interface ExpensePieChartProps {
   bills: Bill[];

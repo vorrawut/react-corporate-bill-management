@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Dropdown, Button, Menu } from 'antd';
 import { SettingOutlined } from '@ant-design/icons';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;

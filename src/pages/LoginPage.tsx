@@ -1,4 +1,3 @@
-// src/pages/LoginPage.tsx
 import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';

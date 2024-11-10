@@ -1,4 +1,3 @@
-// src/types/Bill.ts
 export interface Bill {
   id: string;
   vendorName: string;

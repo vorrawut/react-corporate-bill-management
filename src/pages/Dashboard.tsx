@@ -1,4 +1,3 @@
-// src/pages/Dashboard.tsx
 import React from 'react';
 import { Card, Row, Col, Statistic } from 'antd';
 import { BarChartOutlined, DollarOutlined, FileOutlined } from '@ant-design/icons';

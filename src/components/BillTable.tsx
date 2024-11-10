@@ -1,10 +1,12 @@
-// src/components/BillTable.tsx
 import React from 'react';
-import { Table, Button, Space, Popconfirm } from 'antd';
+import { Table, Button, Space, Popconfirm, Switch, Tooltip, Layout } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, BulbOutlined } from '@ant-design/icons';
 import { Bill } from '../types/Bill';
 import type { ColumnsType } from 'antd/es/table';
+import { useTheme } from '../contexts/ThemeContext';
+
+const { Header, Content, Footer, Sider } = Layout;
 
 interface BillTableProps {
   bills: Bill[];
@@ -13,6 +15,8 @@ interface BillTableProps {
 }
 
 const BillTable: React.FC<BillTableProps> = ({ bills, onEdit, onDelete }) => {
+  const { theme } = useTheme();
+
   const columns: ColumnsType<Bill> = [
     {
       title: 'Bill ID',
@@ -111,7 +115,9 @@ const BillTable: React.FC<BillTableProps> = ({ bills, onEdit, onDelete }) => {
   ];
 
   return (
-    <Table dataSource={bills} columns={columns} rowKey="id" pagination={{ pageSize: 10 }} />
+    <Content style={{ margin: '20px', padding: '20px', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff', borderRadius: '8px' }}>
+        <Table dataSource={bills} columns={columns} rowKey="id" pagination={{ pageSize: 10 }} />
+    </Content>
   );
 };
 
@@ -120,6 +126,7 @@ interface YearSummaryProps {
 }
 
 const YearSummaryTable: React.FC<YearSummaryProps> = ({ bills }) => {
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   const summaryData = Array.from(
@@ -156,13 +163,28 @@ const YearSummaryTable: React.FC<YearSummaryProps> = ({ bills }) => {
   ];
 
   return (
-    <Table
-      dataSource={summaryData}
-      columns={columns}
-      rowKey="year"
-      pagination={{ pageSize: 5 }}
-      title={() => 'Yearly Summary of Bill Expenditure'}
-    />
+    <Layout style={{ minHeight: '100vh', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff' }}>
+      <Sider collapsible theme={theme === 'dark' ? 'dark' : 'light'}>
+        <div style={{ color: theme === 'dark' ? '#ffffff' : '#000000', padding: '20px', textAlign: 'center' }}>Bill Manager</div>
+      </Sider>
+      <Layout>
+        <Header style={{ backgroundColor: theme === 'dark' ? '#141414' : '#f0f2f5', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ color: theme === 'dark' ? '#ffffff' : '#000000' }}>Yearly Summary</h1>
+        </Header>
+        <Content style={{ margin: '20px', padding: '20px', backgroundColor: theme === 'dark' ? '#1f1f1f' : '#ffffff', borderRadius: '8px' }}>
+          <Table
+            dataSource={summaryData}
+            columns={columns}
+            rowKey="year"
+            pagination={{ pageSize: 5 }}
+            title={() => 'Yearly Summary of Bill Expenditure'}
+          />
+        </Content>
+        <Footer style={{ textAlign: 'center', backgroundColor: theme === 'dark' ? '#141414' : '#f0f2f5', color: theme === 'dark' ? '#ffffff' : '#000000' }}>
+          Yearly Summary ©2024
+        </Footer>
+      </Layout>
+    </Layout>
   );
 };
 

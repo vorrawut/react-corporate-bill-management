@@ -1,4 +1,3 @@
-// src/hooks/useExport.ts
 import * as XLSX from "xlsx";
 import { Bill } from "../types/Bill";
 

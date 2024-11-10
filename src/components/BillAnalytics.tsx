@@ -1,4 +1,3 @@
-// src/components/BillAnalytics.tsx
 import React from 'react';
 import { Card } from 'antd';
 import { Bar } from 'react-chartjs-2';

@@ -1,4 +1,3 @@
-// src/state/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import billReducer from "../slices/billSlice";
 

@@ -1,4 +1,3 @@
-// src/components/BillFormModal.tsx
 import React from 'react';
 import { Form, Input, DatePicker, Select, Button } from 'antd';
 import { Bill } from '../types/Bill';

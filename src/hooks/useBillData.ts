@@ -1,4 +1,3 @@
-// src/hooks/useBillData.ts
 import { useState, useEffect } from "react";
 import { Bill } from "../types/Bill";
 

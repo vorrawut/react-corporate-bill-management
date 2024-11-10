@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const BILL_FORM_PREFIX = "bill_form.";
 
 export const BillFormModalConstants = {
@@ -46,4 +48,13 @@ export const BillFormModalConstants = {
   addBill: `${BILL_FORM_PREFIX}addBill`,
   updateBill: `${BILL_FORM_PREFIX}updateBill`,
   cancel: `${BILL_FORM_PREFIX}cancel`,
+
+  // Default Values
+  defaultType: "Fuel",
+  defaultCurrency: "THB",
+  defaultStatus: "Pending",
+  defaultAmount: 1000,
+  defaultBillDate: dayjs(),
+  defaultDueDate: dayjs().add(5, "month").endOf("month"),
+  invoiceNumberPrefix: `${dayjs().year()}_`,
 };

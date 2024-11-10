@@ -1,8 +1,12 @@
-// BillTrackingApp.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Space, Modal, Tabs, Typography, message, Tooltip } from 'antd';
-import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, PieChartOutlined } from '@ant-design/icons';
+import {
+  PlusOutlined,
+  FileExcelOutlined,
+  TableOutlined,
+  BarChartOutlined,
+  PieChartOutlined,
+} from '@ant-design/icons';
 import { Bill } from '../../types/Bill';
 import useBillData from '../../hooks/useBillData';
 import { useExport } from '../../hooks/useExport';
@@ -17,7 +21,7 @@ import styles from './BillTrackingApp.module.css';
 import ExpensePieChart from 'src/features/bill/components/ExpensePieChart';
 import ExpenseBarChart from 'src/features/bill/components/ExpenseBarChart';
 import YearSummaryTable from 'src/features/bill/components/YearSummaryTable';
-import { BillTrackingAppConstants } from './BillTrackingAppConstants'; // Import the constants
+import { BillTrackingAppConstants } from './BillTrackingAppConstants';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -52,6 +56,11 @@ const BillTrackingApp: React.FC = () => {
     setFormModalVisible(true);
   };
 
+  const handleEditBill = (bill: Bill) => {
+    setEditBill(bill);
+    setFormModalVisible(true);
+  };
+
   const handleFormSubmit = async (billData: Bill) => {
     if (editBill) {
       updateBill(billData);
@@ -62,8 +71,14 @@ const BillTrackingApp: React.FC = () => {
     }
 
     setFormModalVisible(false);
-    await syncWithBackend();
   };
+
+  // Reset editBill state whenever modal is closed
+  useEffect(() => {
+    if (!isFormModalVisible) {
+      setEditBill(null);
+    }
+  }, [isFormModalVisible]);
 
   const handleTabChange = (key: string) => {
     setActiveTab(key);
@@ -112,8 +127,7 @@ const BillTrackingApp: React.FC = () => {
         onChange={handleTabChange}
         defaultActiveKey="1"
         tabBarGutter={16}
-        className={`${styles.customTabs} ${isDarkMode ? styles.dark : styles.light
-          }`}
+        className={`${styles.customTabs} ${isDarkMode ? styles.dark : styles.light}`}
         tabBarStyle={{
           backgroundColor: isDarkMode ? '#2b2b2b' : '#ffffff',
           borderBottom: isDarkMode ? '1px solid #444444' : '1px solid #e8e8e8',
@@ -137,7 +151,7 @@ const BillTrackingApp: React.FC = () => {
         >
           <DetailedBillsTab
             filteredBills={filteredBills}
-            onEdit={(editBill) => setEditBill(editBill)}
+            onEdit={handleEditBill} // Pass the new handleEditBill function
             onDelete={deleteBill}
             loading={loading}
           />

@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Space, Modal, Tabs, Typography, Card, Tooltip, Input, message, Skeleton } from 'antd';
+import { Space, Modal, Tabs, Typography, Card, Tooltip, message, Skeleton } from 'antd';
 import { PlusOutlined, FileExcelOutlined, TableOutlined, BarChartOutlined, PieChartOutlined, SearchOutlined } from '@ant-design/icons';
 import BillTable from '../features/bill/components/BillTable/BillTable';
 import YearSummaryTable from '../features/bill/components/YearSummaryTable';
 import BillFormModal from '../features/bill/components/BillFormModal';
 import ExpensePieChart from '../features/bill/components/ExpensePieChart';
 import ExpenseBarChart from '../features/bill/components/ExpenseBarChart';
+import StyledButton from '../components/StyledButton/StyledButton';
+import StyledInput from '../components/StyledInput/StyledInput';
 import { Bill } from '../types/Bill';
 import useBillData from '../hooks/useBillData';
 import { useExport } from '../hooks/useExport';
+import { useTheme } from '../contexts/ThemeContext'; // Add this import for theme context
 
 const { Title, Text } = Typography;
 const { TabPane } = Tabs;
 
 const BillTrackingApp: React.FC = () => {
+  const { theme } = useTheme(); // Add theme usage here
+  const isDarkMode = theme === 'dark';
+
   const { bills, addBill, updateBill, deleteBill, syncWithBackend, loading } = useBillData();
   const [isFormModalVisible, setFormModalVisible] = useState(false);
   const [editBill, setEditBill] = useState<Bill | null>(null);
@@ -66,7 +72,9 @@ const BillTrackingApp: React.FC = () => {
     <Card
       style={{
         borderRadius: '12px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        boxShadow: isDarkMode ? '0 4px 12px rgba(255, 255, 255, 0.1)' : '0 4px 12px rgba(0, 0, 0, 0.1)',
+        backgroundColor: isDarkMode ? '#1f1f1f' : '#ffffff',
+        color: isDarkMode ? '#fff' : '#000',
         padding: '20px',
         marginBottom: '20px',
       }}
@@ -75,17 +83,17 @@ const BillTrackingApp: React.FC = () => {
       <Space style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', gap: '10px' }}>
           <Tooltip title="Add a new bill">
-            <Button type="primary" icon={<PlusOutlined />} onClick={handleAddBill} aria-label="Add a new bill">
+            <StyledButton type="primary" icon={<PlusOutlined />} onClick={handleAddBill}>
               Add Bill
-            </Button>
+            </StyledButton>
           </Tooltip>
           <Tooltip title="Export all bills to Excel">
-            <Button type="default" icon={<FileExcelOutlined />} onClick={() => exportToExcel(bills)} aria-label="Export to Excel">
+            <StyledButton type="default" icon={<FileExcelOutlined />} onClick={() => exportToExcel(bills)}>
               Export to Excel
-            </Button>
+            </StyledButton>
           </Tooltip>
         </div>
-        <Input
+        <StyledInput
           placeholder="Search by vendor name"
           prefix={<SearchOutlined />}
           value={searchTerm}

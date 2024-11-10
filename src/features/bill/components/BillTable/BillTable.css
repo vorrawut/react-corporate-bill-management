@@ -1,4 +1,9 @@
+/* Default light mode */
 .highlight-row {
     background-color: #fffbe6; /* Light yellow for pending local bills */
 }
-  
+
+/* Dark mode */
+.highlight-row-dark {
+    background-color: #4a4a4a; /* Darker color for dark mode */
+}

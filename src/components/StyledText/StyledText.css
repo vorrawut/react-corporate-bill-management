@@ -1,0 +1,18 @@
+.styled-title, .styled-text {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .styled-title.dark-mode, .styled-text.dark-mode {
+    color: #ddd;
+  }
+  
+  .styled-title {
+    font-size: 1.5rem; /* Adjust as needed for different breakpoints */
+    font-weight: bold;
+  }
+  
+  .styled-text {
+    font-size: 1rem;
+  }
+  

@@ -1,0 +1,22 @@
+.custom-input {
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .custom-input:focus {
+    border-color: #1890ff;
+    box-shadow: 0 0 8px rgba(24, 144, 255, 0.2);
+  }
+  
+  .custom-input.dark-mode {
+    background-color: #2b2b2b;
+    border-color: #444;
+    color: #ddd;
+  }
+  
+  .custom-input.dark-mode:focus {
+    border-color: #40a9ff;
+    box-shadow: 0 0 8px rgba(64, 169, 255, 0.4);
+  }
+  

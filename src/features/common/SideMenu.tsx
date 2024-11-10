@@ -1,14 +1,14 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import { DashboardOutlined, FileTextOutlined, LoginOutlined, SettingOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined } from '@ant-design/icons';
 import { useTheme } from '../../contexts/ThemeContext';
 
 interface SideMenuProps {
   collapsed: boolean;
 }
 
-const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
+const SideMenu: React.FC<SideMenuProps> = ({ }) => {
   const { theme } = useTheme();
 
   return (

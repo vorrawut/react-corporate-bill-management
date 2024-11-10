@@ -1,27 +1,62 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2020",                             // Utilize a modern target for better syntax and performance
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "es2020"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "esnext",                              // Suitable for ES modules, optimized for modern bundlers
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "noImplicitAny": false,
+    "isolatedModules": true,                         // Helps with incremental compilation in a large codebase
+    "allowJs": false,                                 // Enforce TypeScript across the project
+    "checkJs": false,                                 // Enforce no JavaScript in a TS project
+    "skipLibCheck": false,                            // Type-check all dependencies for correctness
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,         // Enforce consistent file casing
+    "strict": true,                                   // Enable all strict type checking options
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitAny": true,                            // Disallow implicit any types
+    "noImplicitThis": true,                           // Ensure `this` is explicitly typed
+    "noUnusedLocals": true,                           // Error on unused variables
+    "noUnusedParameters": true,                       // Error on unused function parameters
+    "noFallthroughCasesInSwitch": true,               // Prevent fallthrough in switch statements
+    "noImplicitReturns": true,                        // Ensure all code paths in functions return a value
+    "useUnknownInCatchVariables": true,               // Prevent overly permissive `any` type in catch
+    "incremental": true,                              // Enable faster rebuilds for large projects
+    "removeComments": true,                           // Clean build output by removing comments
+    "outDir": "./dist",                               // Specify the output directory for compiled files
+    "baseUrl": ".",                                   // Base directory to resolve non-relative imports
+    "paths": {                                        // Path aliases for improved module organization
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@styles/*": ["src/styles/*"]
+    },
+    "typeRoots": ["./node_modules/@types", "./types"], // Specify root folders for type definitions
+    "jsx": "react-jsx",                               // Set up JSX for React applications
+    "sourceMap": true,                                // Enable source maps for easier debugging
+    "declaration": true,                               // Emit type declarations for libraries and modules
+    "declarationMap": true,                            // Create maps for declaration files to aid debugging in other projects
+    "emitDecoratorMetadata": true,                     // Needed for projects using decorators (e.g., NestJS)
+    "experimentalDecorators": true                     // Enable decorators if your project needs them
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",                                    // Avoid unnecessary type checks in external dependencies
+    "dist",                                            // Avoid build output folder
+    "**/*.test.ts",                                    // Optionally exclude test files if handled separately
+    "**/*.test.tsx",
+    "coverage"                                         // Typically exclude generated coverage reports
+  ],
+  "references": [                                      // For large projects, utilize project references to organize
+    { "path": "./src/other-package" }
   ]
 }

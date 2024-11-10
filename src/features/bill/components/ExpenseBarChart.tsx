@@ -59,8 +59,8 @@ const ExpenseBarChart: React.FC<ExpenseBarChartProps> = ({ bills, onBarClick }) 
           />
           <Legend verticalAlign="top" height={36} />
           <Bar dataKey="value" barSize={50} animationDuration={1000}>
-            <LabelList dataKey="value" position="top" formatter={(value: number| string) => formatValue(value)} />
-            {data.map((entry, index) => (
+            <LabelList dataKey="value" position="top" formatter={(value: number | string) => formatValue(value)} />
+            {data.map((_, index) => (
               <Cell key={`cell-${index}`} fill={colorScale[index % colorScale.length]} />
             ))}
           </Bar>

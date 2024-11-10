@@ -4,7 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import AppearanceSettings from '../features/settings/AppearanceSettings';
 import LanguageSettings from '../features/settings/LanguageSettings';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 const { Title } = Typography;
 
 const SettingsMenu: React.FC = () => {

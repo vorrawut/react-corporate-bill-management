@@ -1,13 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
-import { DashboardOutlined, FileTextOutlined, LoginOutlined, SettingOutlined } from '@ant-design/icons';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Layout } from 'antd';
 import { useTheme } from '../contexts/ThemeContext';
 import Dashboard from '../pages/Dashboard';
 import BillTrackingApp from '../pages/BillTrackingApp';
 import LoginPage from '../pages/LoginPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import SettingsMenu from '../pages/SettingsMenu';
+import SideMenu from '../components/SideMenu';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -21,20 +21,7 @@ const InnerApp: React.FC = () => {
           <div className="logo" style={{ color: theme === 'dark' ? '#ffffff' : 'black', padding: '20px', textAlign: 'center' }}>
             Bill Management System
           </div>
-          <Menu theme={theme === 'dark' ? 'dark' : 'light'} mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<DashboardOutlined />}>
-              <Link to="/">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<FileTextOutlined />}>
-              <Link to="/bills">Bill Tracking</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<LoginOutlined />}>
-              <Link to="/login">Login</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<SettingOutlined />}>
-              <Link to="/settings">Settings</Link>
-            </Menu.Item>
-          </Menu>
+          <SideMenu collapsed={false} />
         </Sider>
         <Layout>
           <Header style={{ background: theme === 'dark' ? '#141414' : '#fff', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

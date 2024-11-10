@@ -1,0 +1,129 @@
+/* TopBar.module.css */
+
+/* General TopBar Styling */
+.topBar {
+  background: #ffffff;
+  padding: 0 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+}
+
+.topBar.dark {
+  background: #141414;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Header placeholder (for flexible layout) */
+.headerPlaceholder {
+  flex-grow: 1;
+}
+
+/* Avatar Styling */
+.avatar {
+  background-color: #1890ff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #40a9ff; /* Slightly lighter blue for hover */
+}
+
+.avatar.dark {
+  background-color: #40a9ff;
+}
+
+.avatar.dark:hover {
+  background-color: #69c0ff; /* Even lighter blue for hover in dark mode */
+}
+
+/* Notification Bell Button Styling */
+.iconButton {
+  font-size: 1.5rem;
+  color: #000;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.iconButton:hover {
+  color: #1890ff;
+  transform: scale(1.1);
+}
+
+.iconButton.dark {
+  color: #ffffff;
+}
+
+.iconButton.dark:hover {
+  color: #40a9ff;
+}
+
+/* Settings Button Styling */
+.settingsButton {
+  font-weight: bold;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+  color: #000;
+}
+
+.settingsButton:hover {
+  color: #1890ff;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Adding shadow for depth */
+}
+
+.settingsButton.dark {
+  color: #ffffff;
+}
+
+.settingsButton.dark:hover {
+  color: #40a9ff;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2); /* Shadow for dark mode */
+}
+
+/* Settings Menu Styling */
+.settingsMenu {
+  min-width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.settingsMenu.light {
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+}
+
+.settingsMenu.dark {
+  background-color: #1f1f1f;
+  border: 1px solid #444444;
+}
+
+/* Settings Menu Items */
+.menuItem {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #000;
+  transition: all 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.menuItem:hover {
+  background-color: #e6f7ff; /* Light blue on hover */
+  color: #1890ff; /* Highlight text color on hover */
+  transform: scale(1.02);
+}
+
+.menuItem.dark {
+  color: #ffffff;
+}
+
+.menuItem.dark:hover {
+  background-color: #333333; /* Darker background on hover */
+  color: #69c0ff; /* Highlighted text color in dark mode */
+  transform: scale(1.02);
+}

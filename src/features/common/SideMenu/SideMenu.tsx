@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { Menu, Avatar, Dropdown } from 'antd';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { SettingOutlined } from '@ant-design/icons';
 import { useTheme } from '../../../contexts/ThemeContext';
 import ProfileMenu from './ProfileMenu';
 import SideMenuItems from './SideMenuItems';
 import styles from './SideMenu.module.css';
-
-
-const { SubMenu } = Menu;
 
 interface SideMenuProps {
   collapsed: boolean;
@@ -17,6 +14,7 @@ interface SideMenuProps {
 const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
   const { theme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Determine default selected key based on URL
   const defaultKey = location.pathname.includes('bills')
@@ -33,29 +31,31 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
   // Get side menu items from the SideMenuItems function
   const menuItems = SideMenuItems(collapsed);
 
+  // Handle menu item click
+  const handleMenuClick = ({ key }: { key: string }) => {
+    setSelectedKey(key);
+    // Navigate based on the selected menu item
+    const selectedItem = menuItems.find((item) => item.key === key);
+    if (selectedItem && selectedItem.path) {
+      navigate(selectedItem.path);
+    }
+  };
+
   return (
-    <div
-      className={`${styles.sideMenuContainer} ${theme === 'dark' ? styles.dark : ''}`}
-    >
+    <div className={`${styles.sideMenuContainer} ${theme === 'dark' ? styles.dark : ''}`}>
       {/* Profile Section */}
-      <div
-        className={`${styles.profileSection} ${collapsed ? styles.collapsed : ''}`}
-      >
+      <div className={`${styles.profileSection} ${collapsed ? styles.collapsed : ''}`}>
         <Dropdown overlay={<ProfileMenu />} placement="bottomCenter">
           <Avatar
-            size={collapsed ? 50 : 80}
+            size={collapsed ? 40 : 70}
             icon={<SettingOutlined />}
             className={`${styles.profileAvatar} ${collapsed ? styles.collapsed : ''}`}
           />
         </Dropdown>
         {!collapsed && (
-          <div
-            className={`${styles.profileInfo} ${theme === 'dark' ? styles.dark : ''}`}
-          >
+          <div className={`${styles.profileInfo} ${theme === 'dark' ? styles.dark : ''}`}>
             <span className={styles.profileName}>John Doe</span>
-            <p className={`${styles.profileHandle} ${theme === 'dark' ? styles.dark : ''}`}>
-              @johndoe
-            </p>
+            <p className={`${styles.profileHandle} ${theme === 'dark' ? styles.dark : ''}`}>@johndoe</p>
           </div>
         )}
       </div>
@@ -65,41 +65,23 @@ const SideMenu: React.FC<SideMenuProps> = ({ collapsed }) => {
         theme={theme === 'dark' ? 'dark' : 'light'}
         mode="inline"
         selectedKeys={[selectedKey]}
-        onClick={({ key }) => setSelectedKey(key)}
+        onClick={handleMenuClick}
         className={`${styles.menuContainer} ${theme === 'dark' ? styles.dark : ''}`}
-        inlineCollapsed={collapsed}
       >
         {menuItems.map((item) => (
           <Menu.Item
             key={item.key}
             icon={item.icon}
-            className={`${styles.menuItem} ${selectedKey === item.key ? (theme === 'dark' ? styles.menuItemSelected + ' ' + styles.dark : styles.menuItemSelected) : ''
+            className={`${styles.menuItem} ${selectedKey === item.key
+              ? theme === 'dark'
+                ? `${styles.menuItemSelected} ${styles.dark}`
+                : styles.menuItemSelected
+              : ''
               }`}
           >
             {item.label}
           </Menu.Item>
         ))}
-
-        {/* Collapsible Submenu */}
-        <SubMenu
-          key="settings"
-          icon={
-            <SettingOutlined className={`${styles.subMenuIcon}`} />
-          }
-          title={!collapsed ? 'Settings' : ''}
-          className={`${styles.subMenu}`}
-        >
-          <Menu.Item key="settings:1">
-            <Link to="/settings/general" className={`${styles.menuLink} ${theme === 'dark' ? styles.dark : styles.light}`}>
-              General Settings
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="settings:2">
-            <Link to="/settings/security" className={`${styles.menuLink} ${theme === 'dark' ? styles.dark : styles.light}`}>
-              Security
-            </Link>
-          </Menu.Item>
-        </SubMenu>
       </Menu>
     </div>
   );

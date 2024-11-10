@@ -13,6 +13,7 @@ interface MenuItem {
     key: string;
     icon: React.ReactNode;
     label: React.ReactNode;
+    path: string; // Adding path to MenuItem interface
 }
 
 const SideMenuItems = (collapsed: boolean): MenuItem[] => {
@@ -25,6 +26,7 @@ const SideMenuItems = (collapsed: boolean): MenuItem[] => {
                 <DashboardOutlined className={`${styles.menuItemIcon} ${styles.dashboard}`} />
             ),
             label: collapsed ? null : <Link to="/">{t('Dashboard')}</Link>,
+            path: '/', // Adding path property for navigation
         },
         {
             key: 'billTracking',
@@ -36,6 +38,7 @@ const SideMenuItems = (collapsed: boolean): MenuItem[] => {
                 </Tooltip>
             ),
             label: collapsed ? null : <Link to="/bills">{t('Bill Tracking')}</Link>,
+            path: '/bills', // Adding path property for navigation
         },
         {
             key: 'notifications',
@@ -47,6 +50,7 @@ const SideMenuItems = (collapsed: boolean): MenuItem[] => {
                 </Tooltip>
             ),
             label: collapsed ? null : <Link to="/notifications">{t('Notifications')}</Link>,
+            path: '/notifications', // Adding path property for navigation
         },
     ];
 };

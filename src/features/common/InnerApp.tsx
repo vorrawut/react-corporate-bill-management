@@ -8,7 +8,7 @@ import BillTrackingApp from '../../pages/BillTrackingApp';
 import LoginPage from '../../pages/login/LoginPage';
 import NotFoundPage from '../../pages/NotFoundPage';
 import SideMenu from './SideMenu/SideMenu';
-import TopBar from './TopBar';
+import TopBar from './TopBar/TopBar';
 import SettingsMenu from '../../pages/SettingsMenu';
 
 const { Content, Footer, Sider } = Layout;

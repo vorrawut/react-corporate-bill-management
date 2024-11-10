@@ -3,6 +3,7 @@ import { Card, Row, Col, Statistic, Typography, Tooltip, Space, Skeleton } from 
 import { BarChartOutlined, DollarOutlined, FileOutlined } from '@ant-design/icons';
 import BillAnalytics from '../features/bill/components/BillAnalytics';
 import useBillData from '../hooks/useBillData';
+import { useGlobalTranslation } from '../contexts/TranslationContext';
 
 const { Title } = Typography;
 
@@ -11,6 +12,8 @@ const Dashboard: React.FC = () => {
   const [totalBills, setTotalBills] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [overdueCount, setOverdueCount] = useState(0);
+
+  const t = useGlobalTranslation(); // Hook to handle translations
 
   useEffect(() => {
     if (!loading) {
@@ -22,7 +25,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <Title level={2} style={{ marginBottom: 20 }}>Dashboard</Title>
+      <Title level={2} style={{ marginBottom: 20 }}>
+        {t('Dashboard')}
+      </Title>
       <Row gutter={[16, 16]} style={{ marginBottom: 20 }}>
         {loading ? (
           Array.from({ length: 3 }).map((_, index) => (
@@ -42,7 +47,7 @@ const Dashboard: React.FC = () => {
         ) : (
           <>
             <Col xs={24} sm={12} md={8}>
-              <Tooltip title="Total number of bills in the system">
+              <Tooltip title={t('Total number of bills in the system')}>
                 <Card
                   hoverable
                   style={{
@@ -52,7 +57,7 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <Statistic
-                    title="Total Bills"
+                    title={t('Total Bills')}
                     value={totalBills}
                     prefix={<FileOutlined />}
                     valueStyle={{ color: '#3f8600' }}
@@ -61,7 +66,7 @@ const Dashboard: React.FC = () => {
               </Tooltip>
             </Col>
             <Col xs={24} sm={12} md={8}>
-              <Tooltip title="Total amount across all bills">
+              <Tooltip title={t('Total amount across all bills')}>
                 <Card
                   hoverable
                   style={{
@@ -71,18 +76,18 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <Statistic
-                    title="Total Amount"
+                    title={t('Total Amount')}
                     value={totalAmount}
                     prefix={<DollarOutlined />}
                     precision={2}
                     valueStyle={{ color: totalAmount >= 0 ? '#cf1322' : '#3f8600' }}
-                    formatter={value => new Intl.NumberFormat().format(Number(value))}
+                    formatter={(value) => new Intl.NumberFormat().format(Number(value))}
                   />
                 </Card>
               </Tooltip>
             </Col>
             <Col xs={24} sm={12} md={8}>
-              <Tooltip title="Number of overdue bills">
+              <Tooltip title={t('Number of overdue bills')}>
                 <Card
                   hoverable
                   style={{
@@ -92,7 +97,7 @@ const Dashboard: React.FC = () => {
                   }}
                 >
                   <Statistic
-                    title="Overdue Bills"
+                    title={t('Overdue Bills')}
                     value={overdueCount}
                     prefix={<BarChartOutlined />}
                     valueStyle={{ color: '#d48806' }}
